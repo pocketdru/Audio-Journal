@@ -16,6 +16,22 @@ module.exports = function(app) {
     });
   });
 
+  app.get("/api/users", function(req, res) {
+    db.User.findAll({
+      include: [db.Post]
+    }).then(function(dbUser) {
+      res.json(dbUser);
+    });
+  });
+  app.post("/api/users", function(req, res) {
+    db.User.create({
+      name: req.body.user_name,
+      password: req.body.user_password
+    }).then(function(dbUser) {
+      res.json(dbUser);
+    });
+  });
+
   // Create a new post
   app.post("/api/posts", function(req, res) {
     db.Post.create(req.body).then(function(dbPost) {
