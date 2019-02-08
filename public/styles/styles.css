@@ -1,3 +1,37 @@
 .list-group-item {
   line-height: 2.5;
 }
+html{
+  height: 100%;
+}
+body{
+  width: 100%;
+  background: linear-gradient(to top, black, #85bae2, white);
+}
+.modal-title{
+  font-size: 25px;
+  color: black;
+  opacity: .5;
+}
+#modal1,
+#modal2,
+#modal3{
+  border-radius: 25px;
+  border-color: rgba(136,136,136, .35);
+  padding: 40px;
+  background-color:	rgba(136,136,136, .35);
+}
+.button{
+  border-radius: 18px;
+  background-color:	rgba(136,136,136)
+}
+#login{
+  position: relative;
+  margin-left: 0px;
+  width: 47%;
+}
+#sign-up{
+  position: relative;
+  margin-left: 22px;
+  width: 47%;
+}
