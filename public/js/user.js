@@ -26,19 +26,38 @@ $(document).ready(function() {
     console.log("hello");
 
     var newUser = {
-      user_name: $("#sign-username").val().trim(),
-      user_password: $("#sign-password").val().trim()
+      user_name: $("#sign-username")
+        .val()
+        .trim(),
+      user_password: $("#sign-password")
+        .val()
+        .trim()
     };
 
-    $.ajax("/api/users", {
-      type: "POST",
-      data: newUser
-    }).then(function() {
-      console.log("user added");
-    });
-    // $.post("/api/users", newUser, function() {
-    //   window.location.href = "/index";
-    // });
-  });
+    $.get("/api/users", function(data) {
+      if (!data.length) {
+        createUser();
+      };
 
+      for (var i = 0; i < data.length; i++) {
+        if (
+          newUser.user_name === data[i].name &&
+          newUser.user_password === data[i].password
+        ) {
+          console.log("matched");
+          window.location.href = "/user/" + data[i].id;
+        } else {
+          createUser();
+        }
+      }
+    });
+    function createUser() {
+      $.ajax("/api/users", {
+        type: "POST",
+        data: newUser
+      }).then(function() {
+        console.log("user added");
+      });
+    }
+  });
 });

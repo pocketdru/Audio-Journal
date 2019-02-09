@@ -68,7 +68,7 @@ $(document).ready(function() {
     $.ajax({
       method: "PUT",
       url: "/api/posts",
-      data: post
+      data: newPost
     })
       .then(function() {
         window.location.href = "/blog";
