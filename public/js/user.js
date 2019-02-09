@@ -26,8 +26,12 @@ $(document).ready(function() {
     console.log("hello");
 
     var newUser = {
-      user_name: $("#sign-username").val().trim(),
-      user_password: $("#sign-password").val().trim()
+      user_name: $("#sign-username")
+        .val()
+        .trim(),
+      user_password: $("#sign-password")
+        .val()
+        .trim()
     };
 
     $.ajax("/api/users", {
@@ -36,9 +40,20 @@ $(document).ready(function() {
     }).then(function() {
       console.log("user added");
     });
-    // $.post("/api/users", newUser, function() {
-    //   window.location.href = "/index";
-    // });
   });
 
+  $("#post-submit").on("click", function(event) {
+    event.preventDefault();
+    var newPost = {
+      title: $("#title").val().trim(),
+      body: $("#text-post").val().trim()
+    };
+
+    $.ajax("/api/posts", {
+      type: "POST",
+      data: newPost
+    }).then(function() {
+      console.log("post added");
+    });
+  });
 });
