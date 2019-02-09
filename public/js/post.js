@@ -17,25 +17,26 @@ $(document).ready(function() {
     getPostData(postId, "post");
   }
 
-  handlePostSubmit(event) {
-      event.preventDefault();
+  handlePostSubmit(event);
+  {
+    event.preventDefault();
 
-      if(!titleInput.val().trim() || !bodyInput.val().trim()) {
-          return;
-      }
+    if (!titleInput.val().trim() || !bodyInput.val().trim()) {
+      return;
+    }
 
-      var newPost = {
-          title: titleInput.val().trim(),
-          body: bodyInput.val().trim()
-      };
+    var newPost = {
+      title: titleInput.val().trim(),
+      body: bodyInput.val().trim()
+    };
 
-      if(updating) {
-          newPost.id = postId;
-          updatePost(newPost);
-      } else {
-          submitPost(newPost);
-      };
-  };
+    if (updating) {
+      newPost.id = postId;
+      updatePost(newPost);
+    } else {
+      submitPost(newPost);
+    }
+  }
 
   function submitPost(post) {
     $.post("/api/posts", post, function() {
@@ -44,24 +45,24 @@ $(document).ready(function() {
   }
 
   function getPostData(id, type) {
-      var queryUrl;
-      if (type === "post") {
-          queryUrl = "/api/posts/" + id;
-          break;
-      } else {
-          return;
+    var queryUrl;
+    if (type === "post") {
+      queryUrl = "/api/posts/" + id;
+        break;
+    } else {
+      return;
+    }
+
+    $.get(queryUrl, function(data) {
+      if (data) {
+        console.log(data.postId || data.id);
+
+        titleInput.val(data.title);
+        bodyInput.val(data.body);
+
+        updating = true;
       }
-
-      $.get(queryUrl, function(data) {
-          if (data) {
-              console.log(data.postId || data.id);
-
-              titleInput.val(data.title);
-                bodyInput.val(data.body);
-
-                updating = true;
-          }
-      })
+    });
   }
 
   function updatePost(post) {
