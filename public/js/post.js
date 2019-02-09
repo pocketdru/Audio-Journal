@@ -69,9 +69,10 @@ $(document).ready(function() {
     $.ajax({
       method: "PUT",
       url: "/api/posts",
-      data: post
-    }).then(function() {
-      window.location.href = "/blog";
-    });
+      data: newPost
+    })
+      .then(function() {
+        window.location.href = "/blog";
+      });
   }
 });
