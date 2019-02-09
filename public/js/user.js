@@ -21,16 +21,23 @@ $(document).ready(function() {
     event.preventDefault();
   });
 
-  $(".sign-form").on("submit", function(event) {
+  $("#submit").on("click", function(event) {
     event.preventDefault();
+    console.log("hello");
 
     var newUser = {
-      name: $("#sign-user")
-        .val()
-        .trim(),
-      password: $("#sign-password")
-        .val()
-        .trim()
+      user_name: $("#sign-username").val().trim(),
+      user_password: $("#sign-password").val().trim()
     };
+
+    $.ajax("/api/users", {
+      type: "POST",
+      data: newUser
+    }).then(function() {
+      console.log("user added");
+    });
+    // $.post("/api/users", newUser, function() {
+    //   window.location.href = "/index";
+    // });
   });
 });
