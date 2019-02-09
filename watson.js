@@ -4,17 +4,20 @@
 //console.log first
 //get api routing up, server, wrap the wav file and funnel into watson
 //client side, ajax call sends wav file, and add a user id to authenticate
-//get front end talking to front end, use same wav file
+//get back end talking to front end, use same wav file
 //now file upload working (widget), enter into ajax call which sends to watson (console.log in front
 //end) dropzone
 //Converts speech to text
+require("dotenv").config();
 var SpeechToTextV1 = require("watson-developer-cloud/speech-to-text/v1");
 var fs = require("fs");
 
 var speechToText = new SpeechToTextV1({
-  apiKey: process.env.IBM_KEY,
-  url: process.env.IBM_URL
+  iam_apikey: process.env.iam_apikey,
+  url: process.env.url
 });
+
+var audioFile = "Test-Audio.wav";
 
 var params = {
   objectMode: true,
@@ -25,7 +28,7 @@ var params = {
 
 var recognizeStream = speechToText.recognizeUsingWebSocket(params);
 
-fs.createReadStream("audio-file.wav").pipe(recognizeStream);
+fs.createReadStream(audioFile).pipe(recognizeStream);
 
 recognizeStream.on("data", function(event) {
   onEvent("Data:", event);
@@ -40,3 +43,5 @@ recognizeStream.on("close", function(event) {
 function onEvent(name, event) {
   console.log(name, JSON.stringify(event, null, 2));
 }
+
+module.exports = speechToText;
