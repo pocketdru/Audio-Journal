@@ -51,7 +51,8 @@ $(document).ready(function() {
         }
       }
     });
-    function createUser() {
+  });
+  function createUser() {
       $.ajax("/api/users", {
         type: "POST",
         data: newUser
@@ -59,5 +60,20 @@ $(document).ready(function() {
         console.log("user added");
       });
     }
+  });
+
+  $("#post-submit").on("click", function(event) {
+    event.preventDefault();
+    var newPost = {
+      title: $("#title").val().trim(),
+      body: $("#text-post").val().trim()
+    };
+
+    $.ajax("/api/posts", {
+      type: "POST",
+      data: newPost
+    }).then(function() {
+      console.log("post added");
+    });
   });
 });
