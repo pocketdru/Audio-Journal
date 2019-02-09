@@ -1,43 +1,47 @@
 $(document).ready(function() {
-  var loginName = $("#login-username");
-  var loginPassword = $("#login-password");
-  var signName = $("#sign-username");
-  var signPassword = $("#sign-password");
+  $("#modal1").show();
+  console.log("hi");
 
-  $(document).on("submit", userFormSubmit);
+  $("#login").on("click", function() {
+    $("#modal1").hide();
+    $("#modal2").show();
+  });
 
-  function userFormSubmit(event) {
+  $("#sign-up").on("click", function() {
+    $("#modal1").hide();
+    $("#modal3").show();
+  });
+
+  $("#close-button").on("click", function() {
+    $("#modal2").hide();
+    $("#modal3").hide();
+  });
+
+  $(".login-form").on("submit", function(event) {
     event.preventDefault();
+  });
 
-    if (
-      !signName
+  $("#submit").on("click", function(event) {
+    event.preventDefault();
+    console.log("hello");
+
+    var newUser = {
+      user_name: $("#sign-username")
+        .val()
+        .trim(),
+      user_password: $("#sign-password")
         .val()
         .trim()
-        .trim()
-    ) {
-      return;
-    }
+    };
 
-    upsertUser({
-      name: signName.val().trim(),
-      password: signPassword.val().trim()
+    $.ajax("/api/users", {
+      type: "POST",
+      data: newUser
+    }).then(function() {
+      console.log("user added");
     });
-  }
-
-  function upsertUser(userData) {
-    $.post("/api/users", userData).then(getUsers);
-  }
-
-  //   function createUserRow(userData) {
-  //       var new Tr = $("");
-  //   }
-
-  // function getUsers() {
-  //     $.get("/api/users", function(data){
-  //         var = rowsToAdd = [];
-  //         for (var i = 0; i < data.length; i++) {
-  //             rowsToAdd.push(create)
-  //         }
-  //     })
-  // }
+    // $.post("/api/users", newUser, function() {
+    //   window.location.href = "/index";
+    // });
+  });
 });
