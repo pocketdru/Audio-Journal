@@ -21,11 +21,13 @@ $(document).ready(function() {
     event.preventDefault();
   });
 
+  var newUser;
+
   $("#submit").on("click", function(event) {
     event.preventDefault();
     console.log("hello");
 
-    var newUser = {
+    newUser = {
       user_name: $("#sign-username")
         .val()
         .trim(),
@@ -37,7 +39,7 @@ $(document).ready(function() {
     $.get("/api/users", function(data) {
       if (!data.length) {
         createUser();
-      };
+      }
 
       for (var i = 0; i < data.length; i++) {
         if (
@@ -52,16 +54,15 @@ $(document).ready(function() {
       }
     });
   });
-  function createUser() {
-      $.ajax("/api/users", {
-        type: "POST",
-        data: newUser
-      }).then(function() {
-        console.log("user added");
-      });
-    }
-  });
 
+  function createUser() {
+    $.ajax("/api/users", {
+      type: "POST",
+      data: newUser
+    }).then(function() {
+      console.log("user added");
+    });
+  }
   $("#post-submit").on("click", function(event) {
     event.preventDefault();
     var newPost = {
