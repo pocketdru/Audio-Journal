@@ -32,8 +32,6 @@ module.exports = function(app) {
     });
   });
 
-
-  //posts not working
   app.get("/api/posts", function(req, res) {
     db.Post.findAll({
       include: [db.User]
@@ -59,24 +57,24 @@ module.exports = function(app) {
   // });
 
   // // Delete post by id
-  // app.delete("/api/examples/:id", function(req, res) {
-  //   db.Post.destroy({
-  //     where: {
-  //       id: req.params.id
-  //     }
-  //   }).then(function(dbPost) {
-  //     res.json(dbPost);
-  //   });
-  // });
+  app.delete("/api/posts/:id", function(req, res) {
+    db.Post.destroy({
+      where: {
+        id: req.params.id
+      }
+    }).then(function(dbPost) {
+      res.json(dbPost);
+    });
+  });
 
-  // // update posts
-  // app.put("/api/posts", function(req, res) {
-  //   db.Post.update(req.body, {
-  //     where: {
-  //       id: req.body.id
-  //     }
-  //   }).then(function(dbPost) {
-  //     res.json(dbPost);
-  //   });
-  // });
+  // update posts
+  app.put("/api/posts", function(req, res) {
+    db.Post.update(req.body, {
+      where: {
+        id: req.body.id
+      }
+    }).then(function(dbPost) {
+      res.json(dbPost);
+    });
+  });
 };
