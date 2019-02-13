@@ -22,12 +22,22 @@ module.exports = function(app) {
   app.get("/new", function(req, res) {
     res.render("partials/new");
   });
+  app.get("/home", function(req, res) {
+    res.render("partials/home");
+  });
+  // app.get("/user", function(req, res) {
+  //   res.render("partials/user-homepage");
+  // });
   app.get("/user/:id", function(req, res) {
-    db.Users.findOne({ where: { id: req.params.id } }).then(function(dbUser) {
+    console.log(req.params.id);
+    db.User.findOne({ where: { id: req.params.id } }).then(function(dbUser) {
       res.render("partials/user-homepage", {
         id: dbUser
       });
     });
+  });
+  app.get("/user-homepage", function(req, res) {
+    res.render("partials/user-homepage");
   });
 
   // // Load example page and pass in an example by id
