@@ -32,17 +32,21 @@ module.exports = function(app) {
     });
   });
 
+
   //posts not working
   app.get("/api/posts", function(req, res) {
-    db.Post.findAll({}).then(function(dbPost) {
+    db.Post.findAll({
+      include: [db.User]
+    }).then(function(dbPost) {
       res.json(dbPost);
     });
   });
 
   app.post("/api/posts", function(req, res) {
     db.Post.create({
-      title: req.body.title,
-      body: req.body.body
+      title: req.body.new_title,
+      body: req.body.new_body,
+      UserId: req.body.user_id
     }).then(function(dbPost) {
       res.json(dbPost);
     });
