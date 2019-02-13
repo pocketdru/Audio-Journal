@@ -87,23 +87,29 @@ $(document).ready(function() {
   //posting new post to api.
   $("#post-submit").on("click", function(event) {
     event.preventDefault();
+    post();
+  });
+  
+
+  function post() {
     var newPost = {
       new_title: $("#new-title").val().trim(),
       new_body: $("#text-post").val().trim(),
       user_id: sessionStorage.getItem("user-id")
     };
     console.log(newPost);
-    // $.ajax("/api/posts", {
-    //   type: "POST",
-    //   data: newPost
-    // }).then(function() {
+    
+    $.ajax("/api/posts", {
+      type: "POST",
+      data: newPost
+    }).then(function() {
+      console.log("post added");
+    });
+    // $.post("/api/posts", newPost, function() {
+    //   // window.location.href = "/user/" + sessionStorage.getItem("user-id");
     //   console.log("post added");
     // });
-    $.post("/api/posts", newPost, function() {
-      window.location.href = "/user/" + sessionStorage.getItem("user-id");
-    });
-
-  });
+  }
 
   function allPosts() {
     $.get("/api/posts", function(data) {
@@ -120,9 +126,4 @@ $(document).ready(function() {
   }
 
   allPosts();
-
-  $("tr").on("click", function() {
-    console.log("working");
-  });
-
 });
