@@ -69,12 +69,16 @@ $(document).ready(function() {
 
   $("#login-submit").on("click", function() {
     $.get("/api/users", function(data) {
-      var user = $("#login-username").val().trim();
-      var password = $("#login-password").val().trim();
-      for (var i=0; i < data.length; i++) {
+      var user = $("#login-username")
+        .val()
+        .trim();
+      var password = $("#login-password")
+        .val()
+        .trim();
+      for (var i = 0; i < data.length; i++) {
         if (user === data[i].name && password === data[i].password) {
           currentUser = data[i].id;
-          window.location.href= "/user/" + currentUser;
+          window.location.href = "/user/" + currentUser;
           console.log("logged in as " + currentUser);
         } else {
           console.log("wrong login");
@@ -82,14 +86,15 @@ $(document).ready(function() {
       }
       sessionStorage.setItem("user-id", currentUser);
     });
+    getPost();
   });
 
   //posting new post to api.
   $("#post-submit").on("click", function(event) {
     event.preventDefault();
     post();
+    getPost();
   });
-  
 
   function post() {
     var newPost = {
@@ -98,22 +103,32 @@ $(document).ready(function() {
       user_id: sessionStorage.getItem("user-id")
     };
     console.log(newPost);
-    
     $.ajax("/api/posts", {
       type: "POST",
       data: newPost
     }).then(function() {
       console.log("post added");
     });
-    // $.post("/api/posts", newPost, function() {
-    //   // window.location.href = "/user/" + sessionStorage.getItem("user-id");
-    //   console.log("post added");
-    // });
+  }
+
+  function getPost() {
+    $.get("/api/posts", function(data) {
+      for (var i = 0; i < data.length; i++) {
+        var newRow = $("<tr>").append(
+          $("<td>").text(data[i].title),
+          $("<td>").text(data[i].body),
+          $("<td>").text(data[i].createdAt)
+        );
+        console.log(newRow);
+        $("#user-table").append(newRow);
+      }
+    });
+    window.location.href = "/user/" + sessionStorage.getItem("user-id");
   }
 
   function allPosts() {
     $.get("/api/posts", function(data) {
-      for(var i=0; i < data.length; i++) {
+      for (var i = 0; i < data.length; i++) {
         var newRow = $("<tr>").append(
           $("<td>").text(data[i].UserId),
           $("<td>").text(data[i].title),
