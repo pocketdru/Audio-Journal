@@ -16,12 +16,12 @@
                         </tr>
                     </thead>
                     <tbody id="table-body">
-                    <tr>
-                        <td>User</td>
-                        <td>title</td>
-                        <td>this is the post</td>
-                        <td>date goes here</td>
-                    </tr>
+                    <tr>{{#each poop}}</tr>
+                            <td>{{this.User.name}}</td>
+                            <td>{{this.title}}</td>
+                            <td>{{this.body}}</td>
+                            <td>{{this.createdAt}}</td>
+                        {{/each}}
                     </tbody>
                 </table>
             </div>
@@ -29,3 +29,15 @@
         <div class="medium-1 cell"></div>
     </div>
 </div>
+{{!-- <ul>
+          {{#each poop}}
+              <li>{{this.title}}</li>
+          {{/each}}
+ </ul>
+{{#if errors}}
+    {{#each errors}}
+        <div class="alert alert-danger">
+        {{this.msg}}
+    </div>
+    {{/each}}
+{{/if}} --}}

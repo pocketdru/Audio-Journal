@@ -112,33 +112,35 @@ $(document).ready(function() {
   }
 
   function getPost() {
-    $.get("/api/posts", function(data) {
-      for (var i = 0; i < data.length; i++) {
+    $.get("/api/users/" + sessionStorage.getItem("user-id"), function(data) {
+      var p = data[0].Posts;
+      for (var i = 0; i < p.length; i++) {
         var newRow = $("<tr>").append(
-          $("<td>").text(data[i].title),
-          $("<td>").text(data[i].body),
-          $("<td>").text(data[i].createdAt)
+          $("<td>").text(p[i].title),
+          $("<td>").text(p[i].body),
+          $("<td>").text(p[i].createdAt)
         );
         console.log(newRow);
         $("#user-table").append(newRow);
       }
+      console.log(newRow);
     });
-    window.location.href = "/user/" + sessionStorage.getItem("user-id");
+    // window.location.href = "/user/" + sessionStorage.getItem("user-id");
   }
 
-  function allPosts() {
-    $.get("/api/posts", function(data) {
-      for (var i = 0; i < data.length; i++) {
-        var newRow = $("<tr>").append(
-          $("<td>").text(data[i].UserId),
-          $("<td>").text(data[i].title),
-          $("<td>").text(data[i].body),
-          $("<td>").text(data[i].createdAt)
-        );
-        $("#table-body").append(newRow);
-      }
-    });
-  }
+  // function allPosts() {
+  //   $.get("/api/posts", function(data) {
+  //     for (var i = 0; i < data.length; i++) {
+  //       var newRow = $("<tr>").append(
+  //         $("<td>").text(data[i].UserId),
+  //         $("<td>").text(data[i].title),
+  //         $("<td>").text(data[i].body),
+  //         $("<td>").text(data[i].createdAt)
+  //       );
+  //       $("#table-body").append(newRow);
+  //     }
+  //   });
+  // }
 
-  allPosts();
+  // allPosts();
 });
