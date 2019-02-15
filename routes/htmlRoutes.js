@@ -22,12 +22,33 @@ module.exports = function(app) {
   app.get("/new", function(req, res) {
     res.render("partials/new");
   });
+
+  var postObj = {};
+
   app.get("/home", function(req, res) {
-    res.render("partials/home");
+    console.log("get route");
+    var d = db.Post;
+    d.findAll({
+      include: [db.User]
+    }, function(data) {
+      postObj = {
+        posts: data
+      };
+      console.log("hello" + data);
+      // console.log(postObj);
+      // res.render("partials/home", postObj);
+    }).then(poop => {
+      // console.log("poop" + JSON.stringify(poop));
+      // var hello = JSON.stringify(poop);
+      res.render("partials/home", {poop});
+    })
+    // console.log(postObj);
+    // res.render("partials/home", postObj);
   });
-  // app.get("/user", function(req, res) {
-  //   res.render("partials/user-homepage");
-  // });
+
+  app.get("/user", function(req, res) {
+    res.render("partials/user-homepage");
+  });
   app.get("/user/:id", function(req, res) {
     console.log(req.params.id);
     db.User.findOne({ where: { id: req.params.id } }).then(function(dbUser) {

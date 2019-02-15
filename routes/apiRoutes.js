@@ -23,6 +23,18 @@ module.exports = function(app) {
       res.json(dbUser);
     });
   });
+
+  app.get("/api/users/:id", function(req, res) {
+    db.User.findAll({
+      where: {
+        id: req.params.id
+      },
+      include: [db.Post]
+    }).then(function(dbUser) {
+      res.json(dbUser);
+    });
+  });
+
   app.post("/api/users", function(req, res) {
     db.User.create({
       name: req.body.user_name,
@@ -39,7 +51,16 @@ module.exports = function(app) {
       res.json(dbPost);
     });
   });
-
+  // app.get("/api/posts", function(req, res) {
+  //   db.Post.all(function(data) {
+  //     var postObj = {
+  //       posts: data
+  //     };
+  //     console.log(postObj);
+  //     res.render("index", postObj);
+  //   });
+  // });
+  
   app.post("/api/posts", function(req, res) {
     db.Post.create({
       title: req.body.new_title,
