@@ -27,11 +27,11 @@
                         </tr>
                     </thead>
                     <tbody class="user-table">
-                    <tr>
-                        <td>title</td>
-                        <td>this is the post</td>
-                        <td>date goes here</td>
-                    </tr>
+                    <tr>{{#each data1}}</tr>
+                        <td>{{this.dataValues.title}}</td>
+                        <td>{{this.dataValues.body}}</td>
+                        <td>{{this.dataValues.createdAt}}</td>
+                        {{/each}}
                     </tbody>
                 </table>
             </div>

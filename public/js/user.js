@@ -22,7 +22,7 @@ $(document).ready(function() {
     event.preventDefault();
   });
 
-  var newUser;
+  // var newUser;
 
   // $("#submit").on("click", function(event) {
   //   event.preventDefault();
@@ -133,14 +133,13 @@ $(document).ready(function() {
       }
       sessionStorage.setItem("user-id", currentUser);
     });
-    getPost();
   });
 
   //posting new post to api.
   $("#post-submit").on("click", function(event) {
     event.preventDefault();
     post();
-    getPost();
+    window.location.href = "/user/" + sessionStorage.getItem("user-id");
   });
 
   function post() {
@@ -158,36 +157,13 @@ $(document).ready(function() {
     });
   }
 
-  function getPost() {
-    $.get("/api/users/" + sessionStorage.getItem("user-id"), function(data) {
-      var p = data[0].Posts;
-      for (var i = 0; i < p.length; i++) {
-        var newRow = $("<tr>").append(
-          $("<td>").text(p[i].title),
-          $("<td>").text(p[i].body),
-          $("<td>").text(p[i].createdAt)
-        );
-        console.log(newRow);
-        $("#user-table").append(newRow);
-      }
-      console.log(newRow);
-    });
-    // window.location.href = "/user/" + sessionStorage.getItem("user-id");
-  }
-
-  // function allPosts() {
-  //   $.get("/api/posts", function(data) {
-  //     for (var i = 0; i < data.length; i++) {
-  //       var newRow = $("<tr>").append(
-  //         $("<td>").text(data[i].UserId),
-  //         $("<td>").text(data[i].title),
-  //         $("<td>").text(data[i].body),
-  //         $("<td>").text(data[i].createdAt)
-  //       );
-  //       $("#table-body").append(newRow);
-  //     }
-  //   });
-  // }
-
-  // allPosts();
+  $("#table1 tr").on("click", function() {
+    console.log("name", $(this).children()[0].innerHTML);
+    console.log("title", $(this).children()[1].innerHTML);
+    console.log("post", $(this).children()[2].innerHTML);
+    console.log("date", $(this).children()[3].innerHTML);
+    // console.log($(this).children()[1].html());
+    // console.log($(this).children($(".name")).html());
+    // console.log($(this).children($(".title")).html());
+  });
 });

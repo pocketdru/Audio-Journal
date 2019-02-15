@@ -1,21 +1,9 @@
 var db = require("../models");
+// var name = require("../public/js/user");
 
 module.exports = function(app) {
   // Load index page
   app.get("/", function(req, res) {
-    // db.Example.findAll({}).then(function(dbExamples) {
-    //   res.render("index", {
-    //     msg: "Welcome!",
-    //     examples: dbExamples
-    //   });
-    // });
-
-    // db.Posts.findAll({}).then(function(data) {
-    //   var post = {
-    //     posts: data
-    //   };
-    //   res.render("index");
-    // });
     res.render("index");
   });
 
@@ -23,7 +11,6 @@ module.exports = function(app) {
     res.render("partials/new");
   });
 
-  var postObj = {};
 
   app.get("/home", function(req, res) {
     console.log("get route");
@@ -31,47 +18,30 @@ module.exports = function(app) {
     d.findAll({
       include: [db.User]
     }, function(data) {
-      postObj = {
-        posts: data
-      };
       console.log("hello" + data);
-      // console.log(postObj);
-      // res.render("partials/home", postObj);
-    }).then(poop => {
-      // console.log("poop" + JSON.stringify(poop));
-      // var hello = JSON.stringify(poop);
-      res.render("partials/home", {poop});
+    }).then(test => {
+      res.render("partials/home", {test});
     })
-    // console.log(postObj);
-    // res.render("partials/home", postObj);
   });
 
-  app.get("/user", function(req, res) {
-    res.render("partials/user-homepage");
-  });
   app.get("/user/:id", function(req, res) {
-    console.log(req.params.id);
-    db.User.findOne({ where: { id: req.params.id } }).then(function(dbUser) {
-      res.render("partials/user-homepage", {
-        id: dbUser
-      });
-    });
+    db.User.findAll({
+      where: {id: req.params.id},
+      include: [db.Post]
+    }).then(data => {
+      console.log(data[0].Posts[0].dataValues.title);
+      var data1 = data[0].Posts;
+      res.render("partials/user-homepage", {data1});
+    })
   });
+
+  // app.get("/post", function(req, res) {
+  //   res.render("partials/post-page", {name});
+  // })
+
   app.get("/user-homepage", function(req, res) {
     res.render("partials/user-homepage");
   });
-
-  // // Load example page and pass in an example by id
-  // app.get("/example/:id", function(req, res) {
-  //   db.Example.findOne({ where: { id: req.params.id } }).then(function(
-  //     dbExample
-  //   ) {
-  //     res.render("example", {
-  //       example: dbExample
-  //     });
-  //   });
-  // });
-
   // Render 404 page for any unmatched routes
   app.get("*", function(req, res) {
     res.render("404");
