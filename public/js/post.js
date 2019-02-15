@@ -1,78 +1,84 @@
 $(document).ready(function() {
-  var bodyInput = $("#body");
-  var titleInput = $("#title");
-
-  $("#submit").on("click", handlePostSubmit);
-
-  // Gets the part of the url that comes after the "?" (which we have if we're updating a post)
-  var url = window.location.search;
-  var postId;
-  var userId;
-
-  // Sets a flag for whether or not we're updating a post to be false initially
-  var updating = false;
-
-  if (url.indexOf("?post_id=") !== -1) {
-    postId = url.split("=")[1];
-    getPostData(postId, "post");
-  }
-
-  handlePostSubmit(event);
-  {
+  $("#submit").on("click", function(event) {
     event.preventDefault();
-
-    if (!titleInput.val().trim() || !bodyInput.val().trim()) {
+    if (
+      !$("#title")
+        .val()
+        .trim() ||
+      !$("#body")
+        .val()
+        .trim()
+    ) {
+      console.log("The form is didn't fill right");
       return;
     }
 
     var newPost = {
-      title: titleInput.val().trim(),
-      body: bodyInput.val().trim()
+      new_title: $("#title")
+        .val()
+        .trim(),
+      new_body: $("#body")
+        .val()
+        .trim()
     };
 
-    if (updating) {
-      newPost.id = postId;
-      updatePost(newPost);
-    } else {
-      submitPost(newPost);
-    }
-  }
-
-  function submitPost(post) {
-    $.post("/api/posts", post, function() {
-      window.location.href = "/blog";
+    // Sets a flag for whether or not we're updating a post to be false initially
+    $.ajax("/api/posts", {
+      type: "POST",
+      data: newPost
+    }).then(function() {
+      console.log("post added");
+      // window.location
     });
-  }
+  });
 
-  function getPostData(id, type) {
-    var queryUrl;
-    if (type === "post") {
-      queryUrl = "/api/posts/" + id;
-        break;
-    } else {
-      return;
-    }
-
-    $.get(queryUrl, function(data) {
-      if (data) {
-        console.log(data.postId || data.id);
-
-        titleInput.val(data.title);
-        bodyInput.val(data.body);
-
-        updating = true;
-      }
-    });
-  }
-
-  function updatePost(post) {
+  $("#update").on("click", function(event) {
+    event.preventDefault();
+    var id = $(this).data("id");
     $.ajax({
       method: "PUT",
-      url: "/api/posts",
+      url: "/api/posts/" + id,
       data: newPost
-    })
-      .then(function() {
-        window.location.href = "/blog";
-      });
-  }
+    }).then(function() {
+      // window.location.href = "/blog";
+      location.reload();
+    });
+  });
+
+  $("delete").on("click", function(event) {
+    event.preventDefault();
+
+    var id = $(this).data("id");
+
+    $.ajax({
+      method: "DELETE",
+      url: "/api/posts/" + id
+    }).then(function() {
+      console.log("Your post with an ID: " + id + "has been deleted.");
+    });
+  });
 });
+
+// function getPostData(id, type) {
+//   var queryUrl;
+//   switch (type) {
+//     case "post":
+//     queryUrl = "/api/posts/" + id;
+//     break;
+//     case "author":
+//     queryUrl = "/api/authors" + id;
+//     break;
+//     default:
+//     return;
+//   }
+//   $.get(queryUrl, function(data) {
+//     if (data) {
+//       console.log(data.postId || data.id);
+
+//       titleInput.val(data.title);
+//       bodyInput.val(data.body);
+
+//       updating = true;
+//     }
+//   });
+// }
