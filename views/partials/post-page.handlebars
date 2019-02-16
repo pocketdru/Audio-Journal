@@ -7,13 +7,13 @@
                 <table class="scroll hover t-user">
                     <thead>
                         <tr>
-                          <th width="870">{{data1.title}}</th>
+                          <th width="870" class="post-title">{{data1.title}}</th>
                         </tr>
                     </thead>
                     <tbody class="user-table">
                     <tr>
                         <td>{{data1.body}}
-                            <p>{{moment date=data1.createdAt format="MMMM DD, YYYY"}}</p>
+                            <p class="date">{{moment date=data1.createdAt format="MMMM DD, YYYY"}}</p>
                         </td>
                     </tr>
                     </tbody>

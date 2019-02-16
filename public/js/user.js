@@ -106,7 +106,8 @@ $(document).ready(function() {
       if (flag) {
         console.log("12");
         createUser();
-        // location.reload()
+        $("#modal3").hide();
+        $("#modal2").show();
       }
     });
   });
