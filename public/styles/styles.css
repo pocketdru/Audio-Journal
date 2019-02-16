@@ -9,17 +9,17 @@ body{
   background: linear-gradient(to top, black, #85bae2, white);
 }
 .logo-name{
-  padding-top: 20px;
+  padding: 25px 0px 45px 0px;
   font-family: 'Staatliches', cursive;
   color: #696b75;
-  opacity: .7;
-  font-size: 60px;
+  opacity: .8;
+  font-size: 70px;
 
 }
 .page-title{
   font-family: 'Roboto Condensed', sans-serif;
   color: #696b75;
-  padding-left: 25px;
+  padding-left: 75px;
 }
 .modal-title{
   font-size: 25px;
@@ -61,4 +61,11 @@ body{
   background-color: white;
   opacity: .6;
   border-radius: 18px;
+}
+.post-title{
+  font-size: 25px;
+}
+.date{
+  padding-top: 50px;
+  font-size: 15px;
 }
