@@ -6,7 +6,7 @@
         <div class="medium-1 cell"></div>
         <div class="medium-10 cell align-center">
             <div class="table-scroll align-center">
-                <table class="scroll hover t-user">
+                <table class="scroll hover t-user" id="table1">
                     <thead>
                         <tr>
                           <th width="200">User</th>
@@ -16,11 +16,11 @@
                         </tr>
                     </thead>
                     <tbody id="table-body">
-                    <tr>{{#each poop}}</tr>
+                    <tr>{{#each test}}</tr>
                             <td>{{this.User.name}}</td>
                             <td>{{this.title}}</td>
                             <td>{{this.body}}</td>
-                            <td>{{this.createdAt}}</td>
+                            <td>{{moment date=this.createdAt format="MMMM DD, YYYY"}}</td>
                         {{/each}}
                     </tbody>
                 </table>
