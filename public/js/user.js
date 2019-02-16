@@ -89,7 +89,6 @@ $(document).ready(function() {
 
     $.get("/api/users", function(data) {
       var flag = true;
-
       for (var i = 0; i < data.length; i++) {
         if (
           newUser.user_name === data[i].name &&
@@ -131,6 +130,7 @@ $(document).ready(function() {
           console.log("wrong login");
         }
       }
+
       sessionStorage.setItem("user-id", currentUser);
     });
   });
@@ -157,13 +157,37 @@ $(document).ready(function() {
     });
   }
 
-  $("#table1 tr").on("click", function() {
-    console.log("name", $(this).children()[0].innerHTML);
-    console.log("title", $(this).children()[1].innerHTML);
-    console.log("post", $(this).children()[2].innerHTML);
-    console.log("date", $(this).children()[3].innerHTML);
-    // console.log($(this).children()[1].html());
-    // console.log($(this).children($(".name")).html());
-    // console.log($(this).children($(".title")).html());
+  $("#table1 tr").on("click", function(event) {
+    event.preventDefault();
+    var postTitle = $(this).children()[1].innerHTML;
+    window.location.href = "/post/" + postTitle;
   });
+  $("#table2 tr").on("click", function(event) {
+    event.preventDefault();
+    // var postTitle = $(this).children()[0].innerHTML;
+    // window.location.href = "/post/" + postTitle;
+    // console.log($(this).children()[0].innerHTML);
+    console.log("hello");
+  });
+  // function viewPost() {
+  //   var chosenPost = {};
+  //   $("#table1 tr").on("click", function() {
+  //     chosenPost = {
+  //       name: $(this).children()[0].innerHTML,
+  //       title: $(this).children()[1].innerHTML,
+  //       post: $(this).children()[2].innerHTML,
+  //       date: $(this).children()[3].innerHTML
+  //     };
+  //     console.log("name", $(this).children()[0].innerHTML);
+  //     console.log("title", $(this).children()[1].innerHTML);
+  //     console.log("post", $(this).children()[2].innerHTML);
+  //     console.log("date", $(this).children()[3].innerHTML);
+  //     // console.log($(this).children()[1].html());
+  //     // console.log($(this).children($(".name")).html());
+  //     // console.log($(this).children($(".title")).html());
+  //     $(".chosen-post").text(chosenPost.name);
+  //     window.location.href = "/post"\
+  //   });
+  // }
+  // viewPost();
 });

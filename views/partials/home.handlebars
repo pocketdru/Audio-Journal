@@ -17,10 +17,10 @@
                     </thead>
                     <tbody id="table-body">
                     <tr>{{#each test}}</tr>
-                            <td class="name">{{this.User.name}}</td>
-                            <td class="title">{{this.title}}</td>
+                            <td>{{this.User.name}}</td>
+                            <td>{{this.title}}</td>
                             <td>{{this.body}}</td>
-                            <td>{{this.createdAt}}</td>
+                            <td>{{moment date=this.createdAt format="MMMM DD, YYYY"}}</td>
                         {{/each}}
                     </tbody>
                 </table>

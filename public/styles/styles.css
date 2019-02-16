@@ -19,6 +19,7 @@ body{
 .page-title{
   font-family: 'Roboto Condensed', sans-serif;
   color: #696b75;
+  padding-left: 25px;
 }
 .modal-title{
   font-size: 25px;
@@ -55,4 +56,9 @@ body{
 }
 #u-button{
   width: 97%;
+}
+#post-div{
+  background-color: white;
+  opacity: .6;
+  border-radius: 18px;
 }

@@ -1,5 +1,7 @@
 var db = require("../models");
-// var name = require("../public/js/user");
+var Handlebars = require("handlebars");
+var MomentHandler = require("handlebars.moment");
+MomentHandler.registerHelpers(Handlebars);
 
 module.exports = function(app) {
   // Load index page
@@ -29,15 +31,24 @@ module.exports = function(app) {
       where: {id: req.params.id},
       include: [db.Post]
     }).then(data => {
-      console.log(data[0].Posts[0].dataValues.title);
-      var data1 = data[0].Posts;
+      // console.log(data[0].dataValues.name);
+      // var name = data[0].dataValues.name;
+      // var data1 = data[0].Posts;
+      var data1 = data[0];
       res.render("partials/user-homepage", {data1});
     })
   });
 
-  // app.get("/post", function(req, res) {
-  //   res.render("partials/post-page", {name});
-  // })
+  app.get("/post/:title", function(req, res) {
+    db.Post.findAll({
+      where: {title: req.params.title},
+      include: [db.User]
+    }).then(data => {
+      console.log(data[0].dataValues.createdAt);
+      var data1 = data[0].dataValues;
+      res.render("partials/post-page", {data1});
+    })
+  })
 
   app.get("/user-homepage", function(req, res) {
     res.render("partials/user-homepage");

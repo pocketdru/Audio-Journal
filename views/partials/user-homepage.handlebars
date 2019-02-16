@@ -1,8 +1,8 @@
 <h1 class="text-center logo-name"><img src = "/styles/logo.png" class="logo"> Audio Journal</h1>
 
-<h1 class="page-title">username</h1>
+<h1 class="page-title">{{data1.dataValues.name}}</h1>
 
-<div class="grid-container">
+<div class="grid-container" id="table">
     <div class="grid-x grid-margin-x">
         <div class="medium-1 cell"></div>
         <div class="medium-4 cell">
@@ -10,7 +10,7 @@
         </div>
         <div class="medium-2 cell"></div>
         <div class="medium-4 cell">
-            <a class="button" id="u-button" href="/">Home</a>
+            <a class="button" id="u-button" href="/home">Home</a>
         </div>
         <div class="medium-1 cell"></div>
     </div>
@@ -18,7 +18,7 @@
         <div class="medium-1 cell"></div>
         <div class="medium-10 cell align-center">
             <div class="table-scroll align-center">
-                <table class="scroll hover t-user">
+                <table class="scroll hover t-user" id="table2">
                     <thead>
                         <tr>
                           <th width="240">Your Posts</th>
@@ -27,10 +27,10 @@
                         </tr>
                     </thead>
                     <tbody class="user-table">
-                    <tr>{{#each data1}}</tr>
-                        <td>{{this.dataValues.title}}</td>
-                        <td>{{this.dataValues.body}}</td>
-                        <td>{{this.dataValues.createdAt}}</td>
+                    <tr>{{#each data1.Posts}}</tr>
+                            <td>{{this.dataValues.title}}</td>
+                            <td>{{this.dataValues.body}}</td>
+                            <td>{{moment date=this.dataValues.createdAt format="MMMM DD, YYYY"}}</td>
                         {{/each}}
                     </tbody>
                 </table>
