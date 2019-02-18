@@ -95,41 +95,48 @@ $(document).ready(function() {
           newUser.user_password === data[i].password
         ) {
           console.log("matched");
-          // window.location.href = "/user/" + data[i];
+          window.location.href = "/user/" + data[i].id;
           alert("User already exist!");
-          location.reload();
           flag = false;
           break;
         }
       }
       console.log(flag);
       if (flag) {
-        console.log("12");
+        var id = data.length + 1;
         createUser();
-        $("#modal3").hide();
-        $("#modal2").show();
+        window.location.href = "/user/" + id;
+
       }
     });
   });
 
-  var currentUser;
-
   $("#login-submit").on("click", function() {
+    var user = {
+      user_name: $("#login-username")
+      .val()
+      .trim(),
+      user_password: $("#login-password")
+      .val()
+      .trim()
+    };
     $.get("/api/users", function(data) {
-      var user = $("#login-username")
-        .val()
-        .trim();
-      var password = $("#login-password")
-        .val()
-        .trim();
+      var flag = true;
       for (var i = 0; i < data.length; i++) {
-        if (user === data[i].name && password === data[i].password) {
-          currentUser = data[i].id;
-          window.location.href = "/user/" + currentUser;
-          console.log("logged in as " + currentUser);
-        } else {
-          console.log("wrong login");
+        var currentUser = data[i].id;
+        if (user.user_name === data[i].name && user.user_password === data[i].password) {
+          window.location.href = "/user/" + data[i].id;
+
+        flag = false;
+        break;
         }
+      }
+
+      console.log(flag);
+      if (flag) {
+        console.log("Wrong login");
+        alert("Wrong login!");
+        window.location.reload();
       }
 
       sessionStorage.setItem("user-id", currentUser);
@@ -161,7 +168,7 @@ $(document).ready(function() {
   $("#table1 tr").on("click", function(event) {
     event.preventDefault();
     var postTitle = $(this).children()[1].innerHTML;
-    window.location.href = "/post/" + postTitle;
+    // window.location.href = "/post/" + postTitle;
   });
   $("#table2 tr").on("click", function(event) {
     event.preventDefault();

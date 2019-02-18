@@ -9,11 +9,16 @@
                         <tr>
                           <th width="870" class="post-title">{{data1.title}}</th>
                         </tr>
+                        <tr></tr>
                     </thead>
                     <tbody class="user-table">
                     <tr>
                         <td>{{data1.body}}
                             <p class="date">{{moment date=data1.createdAt format="MMMM DD, YYYY"}}</p>
+                        </td>
+                        <td>
+                            <button id="update">Update</button>
+                            <button id="delete">Delete</button>
                         </td>
                     </tr>
                     </tbody>
