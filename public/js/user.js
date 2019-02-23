@@ -1,4 +1,8 @@
 $(document).ready(function() {
+
+  $(".medium-2").on("click", function(){
+
+  })
   $("#modal1").show();
   console.log("hi");
 
@@ -162,6 +166,7 @@ $(document).ready(function() {
       data: newPost
     }).then(function() {
       console.log("post added");
+      location.reload();
     });
   }
 
@@ -198,4 +203,5 @@ $(document).ready(function() {
   //   });
   // }
   // viewPost();
+
 });

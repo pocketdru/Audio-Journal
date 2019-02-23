@@ -6,6 +6,7 @@
         <div class="medium-1 cell"></div>
         <div class="medium-10 cell align-center">
             <div class="table-scroll align-center">
+                <div class="medium-2 cell"> <button class="button" id="refresh">Refresh</button>
                 <table class="scroll hover t-user" id="table1">
                     <thead>
                         <tr>
@@ -18,14 +19,11 @@
                     </thead>
                     <tbody id="table-body">
                         <tr>{{#each test}}</tr>
-                        <td>{{this.User.name}}</td>
-                        <td>{{this.title}}</td>
-                        <td>{{this.body}}</td>
-                        <td>{{moment date=this.createdAt format="MMMM DD, YYYY"}}
-                            {{!-- <button id="update">Update</button>
-                            <button id="delete">Delete</button> --}}
-                        </td>
-                        <td>
+                        <td>{{User.name}}</td>
+                        <td>{{title}}</td>
+                        <td>{{body}}</td>
+                        <td>{{moment date=this.createdAt format="MMMM DD, YYYY"}}</td>
+                        <td id="{{id}}" data-id="{{data.id}}">
                             <button id="update">Update</button>
                             <button id="delete">Delete</button>
                         </td>
