@@ -1,35 +1,37 @@
 $(document).ready(function () {
 
 
-    $("body").on("click", "#update", function (event) {
+    $("[id='update']").on("click", function (event) {
         event.preventDefault();
-        var currentPost = $(this)
-            .parent()
-            .parent()
-            .data("post");
-        // deletePost(currentPost.id);
-        console.log(currentPost);
+        var id = $(this).parent().attr("id");
+
+        // console.log($(this).parent().attr("id"));
+        // var data = {
+        //     ti: $(this).parent();
+        // }
+        var t = $(this).parent().parent().text();
+        var r = "ddd";
+        console.log(t);
         $.ajax({
             method: "PUT",
             url: "/api/posts/" + id,
-            // data: newPost
+            data: r
         }).then(function () {
-            // window.location.href = "/blog";
-            // location.reload();
+            console.log("Your post with an ID: " + id + " has been updated.");
+
         });
     });
 
-    $("#delete").on("click", function (event) {
+    $("[id='delete']").on("click", function (event) {
         event.preventDefault();
 
-        var id = $(this).data("id");
-        console.log("e");
-
+        var id = $(this).parent().attr("id");
+        console.log(id);
         $.ajax({
             method: "DELETE",
             url: "/api/posts/" + id
         }).then(function () {
-            console.log("Your post with an ID: " + id + "has been deleted.");
+            console.log("Your post with an ID: " + id + " has been deleted.");
         });
     });
 });
