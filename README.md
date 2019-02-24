@@ -18,14 +18,14 @@ Users are encouraged to make a new Journal post as well as add an image url. Ani
 * Mocha/Chai
 
 ## Contributors
-Zhanna Avanesova
+* Zhanna Avanesova
   * Frontend Development
     * Foundation, Animate.css
   * Get/Post Requests Posts
-Michelle Brytowski
+* Michelle Brytowski
   * Backend Development Research
   * Get/Post Requests Images
   * WeatherWidget
-Mari Al Ali
+* Mari Al Ali
   * Sequelize
   * Update/Delete Requests
