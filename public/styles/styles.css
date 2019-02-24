@@ -69,15 +69,11 @@ body{
   padding-top: 50px;
   font-size: 15px;
 }
-.dropzone {
-  border-color: black;
-  background: white;
+
+#update, #delete {
+  font-weight: 500;
 }
-#my-dropzone{
-  height: 50px;
-  width: 250px;
-  font-family: 'Roboto Condensed', sans-serif;
-  color: #c0c1c5;
-  border: solid;
-  border-color: #dedfe2;
+
+#update:hover, #delete:hover {
+  text-decoration: underline;
 }

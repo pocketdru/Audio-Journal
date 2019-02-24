@@ -1,20 +1,30 @@
 {
   "name": "project-2",
   "version": "1.0.0",
-  "description": "Project 2 Starter",
+  "description": "",
   "main": "server.js",
-  "scripts": {
-    "start": "node server.js",
-    "lint": "eslint **/*.js --quiet",
-    "fix": "eslint --fix .",
-    "test": "npm run lint && cross-env NODE_ENV=test mocha -u tdd --reporter spec --exit"
+  "directories": {
+    "test": "test"
   },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pocketdru/project-2.git"
+  },
+  "keywords": [],
+  "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pocketdru/project-2/issues"
+  },
+  "homepage": "https://github.com/pocketdru/project-2#readme",
   "dependencies": {
-    "dotenv": "^6.0.0",
-    "express": "^4.16.3",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
     "express-handlebars": "^3.0.0",
-    "handlebars-helpers-inflections": "^1.0.0",
     "handlebars.moment": "^1.0.4",
     "mysql2": "^1.6.4",
     "nodemon": "^1.18.10",
@@ -29,5 +39,7 @@
     "eslint-plugin-prettier": "^2.6.2",
     "mocha": "^5.2.0",
     "prettier": "^1.13.7"
+    "mysql2": "^1.6.5",
+    "sequelize": "^4.42.0"
   }
 }
