@@ -145,8 +145,13 @@ $(document).ready(function() {
 
   function post() {
     var newPost = {
-      new_title: $("#new-title").val().trim(),
-      new_body: $("#text-post").val().trim(),
+      new_title: $("#new-title")
+        .val()
+        .trim(),
+      new_body: $("#text-post")
+        .val()
+        .trim(),
+      image: $("#image").val(),
       user_id: sessionStorage.getItem("user-id")
     };
     console.log(newPost);
@@ -165,9 +170,9 @@ $(document).ready(function() {
   });
   $("#table2 tr").on("click", function(event) {
     event.preventDefault();
-    // var postTitle = $(this).children()[0].innerHTML;
-    // window.location.href = "/post/" + postTitle;
-    // console.log($(this).children()[0].innerHTML);
+    var postTitle = $(this).children()[0].innerHTML;
+    window.location.href = "/post/" + postTitle;
+    console.log($(this).children()[0].innerHTML);
     console.log("hello");
   });
   // function viewPost() {
