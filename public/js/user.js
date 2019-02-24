@@ -96,7 +96,7 @@ $(document).ready(function() {
         ) {
           console.log("matched");
           window.location.href = "/user/" + data[i].id;
-          alert("User already exist!");
+          alert("User already exists!");
           flag = false;
           break;
         }
@@ -106,7 +106,6 @@ $(document).ready(function() {
         var id = data.length + 1;
         createUser();
         window.location.href = "/user/" + id;
-
       }
     });
   });
@@ -114,21 +113,24 @@ $(document).ready(function() {
   $("#login-submit").on("click", function() {
     var user = {
       user_name: $("#login-username")
-      .val()
-      .trim(),
+        .val()
+        .trim(),
       user_password: $("#login-password")
-      .val()
-      .trim()
+        .val()
+        .trim()
     };
     $.get("/api/users", function(data) {
       var flag = true;
       for (var i = 0; i < data.length; i++) {
         var currentUser = data[i].id;
-        if (user.user_name === data[i].name && user.user_password === data[i].password) {
+        if (
+          user.user_name === data[i].name &&
+          user.user_password === data[i].password
+        ) {
           window.location.href = "/user/" + data[i].id;
 
-        flag = false;
-        break;
+          flag = false;
+          break;
         }
       }
 
@@ -173,7 +175,7 @@ $(document).ready(function() {
   $("#table1 tr").on("click", function(event) {
     event.preventDefault();
     var postTitle = $(this).children()[1].innerHTML;
-    // window.location.href = "/post/" + postTitle;
+    window.location.href = "/post/" + postTitle;
   });
   $("#table2 tr").on("click", function(event) {
     event.preventDefault();
@@ -185,8 +187,8 @@ $(document).ready(function() {
   function animate() {
     $(".page-title").hover(function() {
       $(this).addClass("animated fadeIn");
-    })
-      $(".page-title").removeClass("animated fadeIn");
-  };
+    });
+    $(".page-title").removeClass("animated fadeIn");
+  }
   animate();
 });

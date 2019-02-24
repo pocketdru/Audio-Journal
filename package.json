@@ -39,7 +39,5 @@
     "eslint-plugin-prettier": "^2.6.2",
     "mocha": "^5.2.0",
     "prettier": "^1.13.7"
-    "mysql2": "^1.6.5",
-    "sequelize": "^4.42.0"
   }
 }
