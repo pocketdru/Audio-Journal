@@ -3,13 +3,16 @@ module.exports = function(sequelize, DataTypes) {
     title: {
       type: DataTypes.STRING,
       allowNull: false
-      // validate: [1]
     },
 
     body: {
       type: DataTypes.TEXT,
       allowNull: false
-      // len: [1]
+    },
+
+    image: {
+      type: DataTypes.STRING,
+      allowNull: true
     }
   });
 

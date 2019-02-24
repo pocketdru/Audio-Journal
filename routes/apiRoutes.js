@@ -60,12 +60,13 @@ module.exports = function(app) {
   //     res.render("index", postObj);
   //   });
   // });
-  
+
   app.post("/api/posts", function(req, res) {
     db.Post.create({
       title: req.body.new_title,
       body: req.body.new_body,
-      UserId: req.body.user_id
+      UserId: req.body.user_id,
+      image: req.body.image
     }).then(function(dbPost) {
       res.json(dbPost);
     });
